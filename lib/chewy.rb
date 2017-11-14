@@ -35,6 +35,7 @@ try_require 'parallel'
 ActiveSupport.on_load(:active_record) do
   try_require 'will_paginate/active_record'
   try_require 'kaminari/activerecord'
+  try_require 'chewy/rails_3_patch'
 end
 
 ActiveSupport.on_load(:mongoid) do

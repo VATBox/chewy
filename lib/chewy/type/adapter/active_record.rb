@@ -43,7 +43,8 @@ module Chewy
 
         def pluck(scope, fields: [], typecast: true)
           if typecast
-            scope.except(:includes).distinct.pluck(primary_key, *fields)
+            fields << :id if fields.blank?
+            scope.except(:includes).uniq.pluck_all(*fields).map(&:values)
           else
             scope = scope.except(:includes).distinct
             scope.select_values = [primary_key, *fields].map do |column|
